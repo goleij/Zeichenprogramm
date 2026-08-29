@@ -1,0 +1,96 @@
+/*! ------------------------------------------------------------------
+    Tailwind-Quelldatei — NICHT public/app.css bearbeiten!
+    public/app.css wird hieraus generiert:  npm run build:css
+   ------------------------------------------------------------------ */
+
+/* Reihenfolge der Cascade-Layer.
+   "legacy" liegt VOR "utilities", damit Tailwind-Klassen die alten
+   Regeln aus public/style.css (z.B. `button { ... }`) überschreiben können. */
+@layer theme, base, legacy, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "../public/style.css" layer(legacy);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Bewusst OHNE preflight: der globale Reset würde die bestehenden
+   Seiten (Canvas, Tools) verändern. Stattdessen unten ein
+   kleiner Reset, der nur innerhalb von .tw-scope gilt. */
+
+/* Dateien, die nach Klassennamen durchsucht werden */
+@source "../public/app.js";
+@source "../public/index.html";
+
+@theme {
+  --animate-auth-in: auth-in .45s cubic-bezier(.2, .8, .2, 1) both;
+  --animate-auth-shake: auth-shake .3s ease;
+
+  @keyframes auth-in {
+    from { opacity: 0; transform: translateY(14px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes auth-shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-5px); }
+    75%      { transform: translateX(5px); }
+  }
+}
+
+/* Mini-Reset, nur innerhalb der Tailwind-Seiten (Ersatz für preflight) */
+@layer base {
+  .tw-scope,
+  .tw-scope *,
+  .tw-scope *::before,
+  .tw-scope *::after {
+    box-sizing: border-box;
+    border: 0 solid;
+  }
+
+  .tw-scope input,
+  .tw-scope button,
+  .tw-scope textarea,
+  .tw-scope select {
+    font: inherit;
+    color: inherit;
+    background: none;
+  }
+
+  .tw-scope svg { display: block; }
+}
+
+/* ------------------------------------------------------------------
+   Komponenten für Elemente, die zur Laufzeit von drawer.ts /
+   context-menu.ts erzeugt werden. Dort lassen sich keine Utility-
+   Klassen im Markup setzen, deshalb hier gebündelt mit @apply.
+   ------------------------------------------------------------------ */
+@layer components {
+
+  /* Werkzeugleiste — <li> kommt aus ToolArea in drawer.ts */
+  .tools li {
+    @apply cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-slate-600
+           transition select-none hover:bg-slate-200 hover:text-slate-900
+           dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white;
+  }
+
+  .tools li.marked {
+    @apply bg-linear-to-br from-blue-500 to-violet-500 text-white
+           shadow-md shadow-blue-500/25 hover:text-white;
+  }
+
+  /* Kontextmenü — wird von context-menu.ts an <body> gehängt.
+     display wird per Inline-Style umgeschaltet, deshalb hier kein hidden. */
+  .context-menu {
+    @apply absolute z-50 min-w-44 rounded-xl border border-slate-200 bg-white p-1
+           shadow-xl shadow-slate-900/10 dark:border-slate-700 dark:bg-slate-800;
+    font-family: inherit;
+  }
+
+  .context-menu-item {
+    @apply cursor-pointer rounded-lg px-3 py-2 text-sm text-slate-700
+           hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-700;
+  }
+
+  .context-menu-separator {
+    @apply my-1 border-t border-slate-200 dark:border-slate-700;
+  }
+}

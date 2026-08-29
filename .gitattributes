@@ -1,0 +1,8 @@
+# Zeilenenden im Repository immer als LF speichern.
+# Ohne diese Zeile erzeugt Git unter Windows staendig CRLF/LF-Diffs.
+* text=auto eol=lf
+
+# Binaerdateien nicht anfassen
+*.png binary
+*.jpg binary
+*.db  binary

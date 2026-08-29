@@ -1,0 +1,33 @@
+# --- Abhängigkeiten -------------------------------------------------
+node_modules/
+
+# --- Datenbank ------------------------------------------------------
+# Laufzeitdaten mit Benutzerkonten und Passwort-Hashes.
+# Neu erzeugen mit:  npm run db:init
+data.db
+data.db-journal
+*.sqlite
+*.sqlite3
+
+# --- IDE ------------------------------------------------------------
+.idea/
+# .vscode/ bleibt bewusst versioniert (Live-Server-Einstellungen).
+# Wenn das nicht gewuenscht ist, die naechste Zeile einkommentieren:
+# .vscode/
+
+# --- Betriebssystem -------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Logs -----------------------------------------------------------
+*.log
+npm-debug.log*
+
+# HINWEIS: Die Build-Artefakte werden absichtlich NICHT ignoriert:
+#   public/app.css          (Tailwind-Ausgabe aus src/input.css)
+#   public/drawer.js        (tsc-Ausgabe aus public/drawer.ts)
+#   public/context-menu.js  (tsc-Ausgabe aus public/context-menu.ts)
+# Grund: "npm start" startet nur den Server und baut nichts. Ohne diese
+# Dateien waere die Anwendung nach einem frischen Clone ohne Styles und
+# die Canvas-Seite wuerde nicht laden.

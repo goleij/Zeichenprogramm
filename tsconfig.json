@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es2017",
+    "lib": [
+      "es2019",
+      "dom"
+      ],
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

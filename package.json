@@ -1,0 +1,27 @@
+{
+  "name": "drawer_a4.2.2",
+  "version": "1.0.0",
+  "main": "context-menu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && npm run build:css",
+    "start": "node server.js",
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/app.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./public/app.css --watch",
+    "db:init": "node initDB.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.8.3"
+  },
+  "description": "",
+  "dependencies": {
+    "sqlite3": "^5.1.7",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.3"
+  }
+}
